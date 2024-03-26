@@ -12,7 +12,7 @@
 }
 
 .board {
-  width: calc(64px * 8);
+  width: calc(64px * 8 + 10px);
   height: calc(64px * 8);
   display: flex;
   flex-wrap: wrap;
@@ -56,4 +56,20 @@
   padding: 30px;
   margin-left: 50px;
   background-color: lightgray;
+}
+
+.numbers {
+  width: 10px;
+  position: relative;
+}
+
+.numbers div {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.letter {
+  width: 64px;
+  text-align: center;
 }

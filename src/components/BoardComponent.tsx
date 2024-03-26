@@ -11,8 +11,12 @@ interface BoardProps {
     swapPlayer: () => void;
 }
 
+const verticalCoordinates: string[] = ['8','7','6','5','4','3','2','1'];
+const horizontalCoordinates: string[] = ['a','b','c','d','e','f','g','h'];
+
 const BoardComponent: FC<BoardProps> = ({board, setBoard, currentPlayer, swapPlayer}) => {
     const [selectedCell, setSelectedCell] = useState<Cell | null>(null)
+    
     useEffect(() => {
         highlightCells();
     }, [selectedCell]);
@@ -42,7 +46,7 @@ const BoardComponent: FC<BoardProps> = ({board, setBoard, currentPlayer, swapPla
     return (
         <div>
             <h3>Current player {currentPlayer?.color}</h3>
-            <div className="board">
+            <div className="board" >
                 {board.cells.map((row, index) =>
                     <React.Fragment key={index}>
                         {row.map(cell =>
@@ -53,7 +57,11 @@ const BoardComponent: FC<BoardProps> = ({board, setBoard, currentPlayer, swapPla
                                 selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}
                             />
                         )}
+                        <div className="numbers"><div>{verticalCoordinates[index]}</div></div>
                     </React.Fragment>)}
+                {horizontalCoordinates.map(letter =>
+                    <div className="letter">{letter}</div>
+                )}
             </div>
         </div>
     );

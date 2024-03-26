@@ -5,6 +5,7 @@ import {Board} from "./models/Board";
 import {Player} from "./models/Player";
 import {Colors} from "./models/Colors";
 import LostFigures from "./components/LostFigures";
+import Timer from "./components/Timer";
 
 function App() {
     const [board, setBoard] = useState(new Board())
@@ -23,27 +24,33 @@ function App() {
         newBoard.addFigures();
         setBoard(newBoard);
     }
-    
+
     function swapPlayer() {
         setCurrentPlayer(currentPlayer?.color === Colors.WHITE ? blackPlayer : whitePlayer);
     }
-    
+
     return (
         <div className="app">
+            <Timer
+                restart={restart}
+                currentPlayer={currentPlayer}
+            />
             <BoardComponent
                 board={board}
                 setBoard={setBoard}
                 currentPlayer={currentPlayer}
                 swapPlayer={swapPlayer}
             />
-            <LostFigures
-                title={"Black figures"}
-                figures={board.lostBlackFigures}
-            />
-            <LostFigures
-                title={"White figures"}
-                figures={board.lostWhiteFigures}
-            />
+            <div>
+                <LostFigures
+                    title={"Black figures"}
+                    figures={board.lostBlackFigures}
+                />
+                <LostFigures
+                    title={"White figures"}
+                    figures={board.lostWhiteFigures}
+                />
+            </div>
         </div>
     );
 }
